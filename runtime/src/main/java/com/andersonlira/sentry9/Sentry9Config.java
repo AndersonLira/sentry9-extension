@@ -1,0 +1,44 @@
+package com.andersonlira.sentry9;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.logging.Level;
+
+import io.quarkus.runtime.annotations.ConfigItem;
+import io.quarkus.runtime.annotations.ConfigPhase;
+import io.quarkus.runtime.annotations.ConfigRoot;
+
+/**
+ * Configuration for Sentry9 logging.
+ */
+@ConfigRoot(phase = ConfigPhase.RUN_TIME, name = "sentry9")
+public class Sentry9Config {
+
+    /**
+     * Determine whether to enable the Sentry9 logging extension.
+     */
+    @ConfigItem(defaultValue = "false")
+    boolean enable;
+
+    /**
+     * Sentry DSN
+     *
+     * The DSN is the first and most important thing to configure because it tells the SDK where to send events. You can find
+     * your project’s DSN in the “Client Keys” section of your “Project Settings” in Sentry.
+     */
+    @ConfigItem
+    public Optional<String> dsn;
+
+    /**
+     * The sentry log level.
+     */
+    @ConfigItem(defaultValue = "WARN")
+    public Level level;
+
+    /**
+     * To diferentiate non application packages, put in this property the packages that should scanned by Sentry
+     */
+    @ConfigItem
+    public Optional<List<String>> inAppPackages;
+
+}

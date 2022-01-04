@@ -1,12 +1,13 @@
 package com.andersonlira.sentry9.extension.deployment;
 
+import com.andersonlira.sentry9.Sentry9Config;
+import com.andersonlira.sentry9.SentryLoggerFactory;
 
-import com.andersonlira.sentry9.extension.runtime.Logger;
-
-
-import io.quarkus.arc.deployment.AdditionalBeanBuildItem;
 import io.quarkus.deployment.annotations.BuildStep;
+import io.quarkus.deployment.annotations.Record;
+import io.quarkus.deployment.annotations.ExecutionTime;
 import io.quarkus.deployment.builditem.FeatureBuildItem;
+import io.quarkus.deployment.builditem.LogHandlerBuildItem;
 
 class Sentry9ExtensionProcessor {
 
@@ -18,9 +19,10 @@ class Sentry9ExtensionProcessor {
         return new FeatureBuildItem(FEATURE);
     }
 
-    @BuildStep 
-    AdditionalBeanBuildItem prepareSentry(){
-       return new AdditionalBeanBuildItem.Builder().addBeanClass(Logger.class).build();
+    @BuildStep
+    @Record(ExecutionTime.RUNTIME_INIT)
+    LogHandlerBuildItem addSentryLogHandler(final SentryLoggerFactory factory,final Sentry9Config config) {
+        return new LogHandlerBuildItem(factory.create(config));
     }
 
 }
