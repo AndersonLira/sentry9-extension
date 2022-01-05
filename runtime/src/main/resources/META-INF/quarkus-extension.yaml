@@ -7,5 +7,4 @@ metadata:
 #  categories:
 #    - "miscellaneous"
 #  status: "preview"
-  config:
-    - "quarkus.sentry9."
+    
