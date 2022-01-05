@@ -41,6 +41,6 @@ public class Sentry9Config {
      * To diferentiate non application packages, use inAppPackages property the packages that should scanned by Sentry
      */
     @ConfigItem(name = "inAppPackages")
-    public Optional<List<String>> inAppPackages;
+    public Optional<String> inAppPackages;
 
 }
