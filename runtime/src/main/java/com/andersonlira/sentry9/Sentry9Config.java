@@ -13,7 +13,7 @@ import io.quarkus.runtime.annotations.ConfigRoot;
  */
 @ConfigRoot(phase = ConfigPhase.RUN_TIME, name = "sentry9")
 public class Sentry9Config {
-
+    public static final String DNS = "dsn";
     /**
      * Sentry enable
      * Determine whether to enable the Sentry9 logging extension.
@@ -27,7 +27,7 @@ public class Sentry9Config {
      * The DSN is the first and most important thing to configure because it tells the SDK where to send events. You can find
      * your project’s DSN in the "Client Keys" section of your "Project Settings" in Sentry.
      */
-    @ConfigItem(name = "dsn")
+    @ConfigItem(name = DNS)
     public Optional<String> dsn;
 
     /**
@@ -38,9 +38,9 @@ public class Sentry9Config {
 
     /**
      * Sentry inAppPackages
-     * To diferentiate non application packages, use inAppPackages property the packages that should scanned by Sentry
+     * To differentiate non application packages, use inAppPackages property the packages that should scanned by Sentry
      */
     @ConfigItem(name = "inAppPackages")
-    public Optional<String> inAppPackages;
+    public Optional<List<String>> inAppPackages;
 
 }
